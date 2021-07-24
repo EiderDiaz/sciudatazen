@@ -1,7 +1,7 @@
 # 📚 Documentacion sobre los diagramas mas importantes del proyecto
 
 ## Tabla de contenidos
-1. [Sciudatazen ERD](#Sciudatazen ERD)
+1. [Sciudatazen ERD](#Sciudatazen)
 
 
 ## Diagramas
