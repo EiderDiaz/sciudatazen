@@ -1,0 +1,11 @@
+# 📚 Documentacion sobre los diagramas mas importantes del proyecto
+
+## Tabla de contenidos
+1. [Sciudatazen ERD](#Sciudatazen ERD)
+
+
+## Diagramas
+### Sciudatazen ERD
+Entity Relation Diagram de la base de datos para el mapeo de puntos y despliegue de indice de riesgos (IRASE)
+
+***
