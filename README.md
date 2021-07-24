@@ -8,7 +8,6 @@
 3. [Codigo](Src/readme_src.md)
 4. [Datasets](Data/readme_datasets.md)
 
-## contiene las formulas para sacar el indice de riesgo 
 
 
 https://www.oecdregionalwellbeing.org/ME19.html
