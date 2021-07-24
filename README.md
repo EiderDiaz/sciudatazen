@@ -9,5 +9,5 @@
 4. [Datasets](Data/readme_datasets.md)
 
 
+## el objetivo es crear un mapa de puntos, similar a https://www.oecdregionalwellbeing.org/ME19.html, para calcular el IRASE 
 
-https://www.oecdregionalwellbeing.org/ME19.html
