@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.js" ></script>
+    
+    <title>Grafica radar</title>
+</head>
+<body>
+    <canvas id="myChart" width="200" height="100" ></canvas>
+</body>
+
+<script>
+    var ctx=document.getElementById("myChart");
+    var valor1= 50;   //declaracion valores 
+    const data = {
+      labels: [
+        'Eating',
+        'Drinking',
+        'Sleeping',
+        'Designing',
+        'Coding',
+        'Cycling',
+        'Running'
+      ],
+      datasets: [{
+        label: 'My First Dataset',
+        data: [valor1, 59, 40, 81, 30, 55, 40],
+        fill: true,
+        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+        borderColor: 'rgb(255, 99, 132)',
+        pointBackgroundColor: 'rgb(255, 99, 132)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(255, 99, 132)'
+      }, {
+        label: 'My Second Dataset',
+        data: [28, 48, 40, 19, 96, 27, 100],
+        fill: true,
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgb(54, 162, 235)',
+        pointBackgroundColor: 'rgb(54, 162, 235)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgb(54, 162, 235)'
+      }]
+    };
+
+    // Imprimir la grafica dentro de <canvas>
+    var myChart = new Chart(ctx, {
+    type: 'radar',
+    data: data,
+    options: {
+        elements: {
+        line: {
+            borderWidth: 3
+        }
+        }
+    },
+    });
+
+</script>
+
+</html>
