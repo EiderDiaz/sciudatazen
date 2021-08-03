@@ -41,13 +41,14 @@ var Agua = {
 
 
   var context = document.querySelector('#graph').getContext('2d');
-  new Chart(context).Radar(Agua);
-    
+  var myChart = new Chart(context).Radar(Agua);
+
   $("#btn1").on("click", function() {
-     var context1 = document.querySelector('#graph');
-    new Chart(context1).Radar(Agua);
+    myChart.destroy();
+    myChart = new Chart(context).Radar(Agua);
+     
   });
   $("#btn2").on("click", function() {
-    var context2 = document.querySelector('#graph').getContext('2d');
-    new Chart(context2).Radar(Aire);
+    myChart.destroy();
+    myChart = new Chart(context).Radar(Aire);
   });

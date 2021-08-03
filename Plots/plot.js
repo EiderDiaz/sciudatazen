@@ -44,13 +44,13 @@ var data1 = {
   };
 
 var context = document.querySelector('#graph').getContext('2d');
-new Chart(context).Line(data);
+new Chart(context).Radar(data);
   
 $("#btn1").on("click", function() {
    var context1 = document.querySelector('#graph').getContext('2d');
-  new Chart(context1).Line(data);
+  new Chart(context1).Radar(data);
 });
 $("#btn2").on("click", function() {
   var context2 = document.querySelector('#graph').getContext('2d');
-  new Chart(context2).Line(data1);
+  new Chart(context2).Radar(data1);
 });
