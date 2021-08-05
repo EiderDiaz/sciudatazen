@@ -1,32 +1,189 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/css/ol.css" type="text/css">
-    <style>
-      .map {
-        height: 400px;
-        width: 100%;
-      }
+
+
+                     
+<html>
+    <head>
+      <script src="https://cdn.anychart.com/releases/v8/js/anychart-base.min.js"></script>
+      <script src="https://cdn.anychart.com/releases/v8/js/anychart-ui.min.js"></script>
+      <script src="https://cdn.anychart.com/releases/v8/js/anychart-exports.min.js"></script>
+      <script src="https://cdn.anychart.com/releases/v8/js/anychart-map.min.js"></script>
+      <script src="https://cdn.anychart.com/releases/v8/js/anychart-data-adapter.min.js"></script>
+      <script src="https://cdn.anychart.com/geodata/latest/countries/united_states_of_america/united_states_of_america.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.15/proj4.js"></script>
+      <link href="https://cdn.anychart.com/releases/v8/css/anychart-ui.min.css" type="text/css" rel="stylesheet">
+      <link href="https://cdn.anychart.com/releases/v8/fonts/css/anychart-font.min.css" type="text/css" rel="stylesheet">
+      <style type="text/css">
+    
+        html,
+        body,
+        
+
+        .split {
+            height: 100%;
+            width: 50%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            overflow-x: hidden;
+            padding-top: 20px;
+            }
+
+            .left {
+            left: 0;
+            background-color: #111;
+            }
+
+            /* Control the right side */
+            .right {
+            right: 0;
+           
+            }
+
+            .centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        }
+      
     </style>
-    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.6.1/build/ol.js"></script>
-    <title>OpenLayers example</title>
-  </head>
-  <body>
-    <h2>My Map</h2>
-    <div id="map" class="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([37.41, 8.82]),
-          zoom: 4
-        })
-      });
+    </head>
+    <body>
+        <div class="split left" id='container'></div>
+        <div class="split right">
+            <div class="centered">
+                <canvas id="graph" width="800px" height="800px"></canvas>
+            </div>
+        </div>
+   
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.min.js"></script>
+      
+    
+      <script>
+        var Agua = {
+            labels: [
+                'Balance_hídrico',
+                'Pendiente',
+                'Indice_de_humedad_topogrófica',
+                'Cuencas_hidrológicas',
+                'Rangos_humedad',
+                'Clima',
+                'Precipitación_media_anual',
+                'Regimen_humedad_del_suelo',
+                'Escurrimiento_natural_superficial',
+                'Indice_de_peligro_inundación'
+            ],
+            datasets: [{
+            data: [0.1,0.2,0.260207,0.05094339623,0.02,0.1999999986,0.04,0.2,0.01452281697,0.4],
+            backgroundColor: 'rgba(54, 162, 235, 0.2)',
+            borderColor: 'rgb(54, 162, 235)',
+            pointBackgroundColor: 'rgb(54, 162, 235)',
+            pointBorderColor: '#fff',
+            pointHoverBackgroundColor: '#fff',
+            pointHoverBorderColor: 'rgb(54, 162, 235)'
+            }]
+        };
+    
+        anychart.onDocumentReady(function () {
+          // The data used in this sample can be obtained from the CDN
+          // https://cdn.anychart.com/samples/maps-point-maps-dot-maps/usa-airports/data.json
+          anychart.data.loadJsonFile(
+            'https://cdn.anychart.com/samples/maps-point-maps-dot-maps/usa-airports/data.json',
+            function (data) {
+              // creates map chart
+              var map = anychart.map();
+              map
+                .credits()
+                .enabled(true)
+                .url(
+                  'https://opendata.socrata.com/dataset/Airport-Codes-mapped-to-Latitude-Longitude-in-the-/rxrh-4cxm'
+                )
+                .text('Data source: https://opendata.socrata.com')
+                .logoSrc(
+                  'https://opendata.socrata.com/stylesheets/images/common/favicon.ico'
+                );
+    
+              map
+                .unboundRegions()
+                .enabled(true)
+                .fill('#E1E1E1')
+                .stroke('#D2D2D2');
+    
+              // sets geodata
+              map.geoData('anychart.maps.united_states_of_america');
+    
+              // sets Chart Title
+              map
+                .title()
+                .enabled(true)
+                .useHtml(true)
+                .padding([0, 0, 10, 0])
+                .text(
+                  'Airports in the United States<br/><span style="color:#929292; font-size: 12px;">' +
+                  'According to opendata.socrata.com<br/>Cities and names were collected from Wikipedia.org</span>'
+                );
+    
+              // sets marker series for airports
+              var ctx= document.getElementById('graph').getContext('2d');
+              var myChart
+              var series = map.marker(anychart.data.set(data));
+              var func_listen = function(e){
+                  
+                 myChart = new Chart(ctx).Radar(Agua);
+                };
+              var delete_map = function(e){
+                    myChart.destroy();
+              }
+
+                // add a listener
+                series.listen('dblclick', func_listen);
+                series.listen('click', delete_map);
+            
+    
+              // sets Tooltip for series
+              series
+                .tooltip()
+                .useHtml(true)
+                .padding([8, 13, 10, 13])
+                .title(false)
+                .separator(false)
+                .fontSize(14)
+                .format(function () {
+                  return (
+                    '<span>' +
+                    this.getData('name') +
+                    '</span><br/>' +
+                    '<span style="font-size: 12px; color: #E1E1E1">City: ' +
+                    this.getData('city') +
+                    '</span>'
+                  );
+                });
+    
+              // sets settings for marker-airports series
+              series
+                .size(5)
+                .labels(false)
+                .stroke(null)
+                .stroke('2 #E1E1E1')
+                .fill('#1976d2')
+                .selectionMode('none');
+    
+              // create zoom controls
+              var zoomController = anychart.ui.zoom();
+              zoomController.render(map);
+    
+              // sets container id for the chart
+              map.container('container');
+              // initiates chart drawing
+              map.draw();
+            }
+          );
+        });
+      
     </script>
-  </body>
-</html>
+    </body>
+    </html>
+    
+                    
