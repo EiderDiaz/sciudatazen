@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Profile {% endblock %}
+
+
+{% block content %}
+
+<h1> {{user.get_full_name}} (@{{ user.username }}) </h1>
+
+    {% with profile=user.profile %}
+        {% if profile %}
+        <h2>
+            {{profile.persona|default:""}}
+        </h2>
+        <div>
+            {{ profile.bio|default:"" }}
+        </div>
+
+        <div>
+            {% with website=profile.website|default:"" %}
+            <a href="{{website}}">{{website}}</a>
+            {% endwith %}
+        </div>
+        <br/>
+        <div>
+            Interest:
+            {% for interest in profile.interest.all %} <!-- query to db -->
+            <span> {{interest.name}}{% if not forloop.last %}, {% endif %} </span>    
+            {% endfor %}
+        </div>
+        {% endif %} <!-- end if profile-->
+    {% endwith %} <!-- with caches a complex variable under a simpler name. This is useful when accessing an “expensive” method (e.g., one that hits the database) multiple times.-->
+
+{% endblock %}

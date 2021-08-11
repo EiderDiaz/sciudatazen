@@ -1,0 +1,4 @@
+# everything the developer needs in atiton to the production requriemtens
+-r prod.txt
+
+mypy==0.910

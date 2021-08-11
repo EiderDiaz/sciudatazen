@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} Home {% endblock %}
+
+
+{% block content %}
+<!--"C:\Users\eider\Documents\GitHub\django hacker shack\static\theme\assets\img\avataaars.svg"-->
+<!-- static/theme/assets/img/avataaars.svg-->
+<!-- {% static 'theme/assets/img/avataaars.svg' %} -->
+
+ <!-- Masthead-->
+ <header class="masthead bg-primary text-white text-center">
+    <div class="container d-flex align-items-center flex-column">
+        <!-- Masthead Avatar Image-->
+        <img class="masthead-avatar mb-5" src="{% static 'img/walle-circle.png' %}" alt="..." />
+        <!-- Masthead Heading-->
+        <h1 class="masthead-heading text-uppercase mb-0">Lorem ipsum dolor</h1>
+       
+    </div>
+</header>
+{% endblock %}

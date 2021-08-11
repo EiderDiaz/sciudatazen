@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+
+{% block title %} Contact {% endblock %}
+
+
+{% block content %}
+
+<section class="page-section" 1d="contact">
+<div class= "container">
+<!-- Contact Section Heading -->
+<h2 class="page-section-heading text-center text-uppercase text-secondary mb-0"> Contact Us </h2>
+<!-- Icon Divider -->
+<div class="divider-custom"> 
+<div class="divider-custom-line"> </div>
+<div class="divider-custom-icon"><i class="fas fa-envelope"> </i> </div>
+<div class="divider-custom-line"> </div>
+</div>
+<div class= text-center text-secondary mb-0>
+<p>
+     We do our best to respond to emails, but we get so many that it's sometimes hard to respond to all of them. If you don't
+</p>
+<p> 
+    If you need help with a coding project, please don't send us an email. We don't have enough bandwidth to answer specific
+</p>
+ <p>  
+     You con also send us an email at <a href="mailto:juan@rubisco.mx"> juan@rubisco.mx</a>
+</p> 
+</div>
+
+<!-- Contact Section Form-->
+<div class="row">
+    <div class=" col-lg-8 mx-auto">
+        {% if success %}
+        <div class="alert alert-success" role="alert">
+            your message was sent! check your inbox for a response.
+          </div>
+        {% endif %}
+        <!-- To configure the contact form email address, go to mail/contact_me.php and update the email address in the PHP file on 1-->
+        <form id="contactForm" name="sentMessage" novalidate="novalidate", method="post">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{form.non_field_errors}}
+              </div>
+            {%endif %}
+            {% for field in form %}
+                <div class="control-group">
+                    <div class=" form-group floating-label-form-group controls mb-0 pb-2">
+                        {{ field.label_tag }}
+                        {{ field }}
+                        {% for error in field.errors %}
+                        <p class="help-black text-danger"> {{error}}</p>
+                        {% endfor %}
+                    </div>  
+                </div>
+            {% endfor %}
+          
+
+           <br/>     
+            <div class="form-group"> <button class="btn sczen-bg-primary btn-xl text-white" id="sendMessageButton" type="submit"> Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+</section>
+{% endblock %}
